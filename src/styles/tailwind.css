@@ -1,0 +1,211 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  :root {
+    /* Primary Colors */
+    --color-primary: #FF6B35; /* warm orange */
+    --color-primary-foreground: #FFFFFF; /* white */
+    
+    /* Secondary Colors */
+    --color-secondary: #2E8B57; /* forest green */
+    --color-secondary-foreground: #FFFFFF; /* white */
+    
+    /* Accent Colors */
+    --color-accent: #FFD700; /* golden yellow */
+    --color-accent-foreground: #1A1A1A; /* near-black */
+    
+    /* Background Colors */
+    --color-background: #FAFAFA; /* soft off-white */
+    --color-foreground: #1A1A1A; /* near-black */
+    
+    /* Surface Colors */
+    --color-card: #FFFFFF; /* pure white */
+    --color-card-foreground: #1A1A1A; /* near-black */
+    --color-popover: #FFFFFF; /* pure white */
+    --color-popover-foreground: #1A1A1A; /* near-black */
+    
+    /* Muted Colors */
+    --color-muted: #F5F5F5; /* light gray */
+    --color-muted-foreground: #666666; /* medium gray */
+    
+    /* Border and Input */
+    --color-border: #E0E0E0; /* light gray */
+    --color-input: #FFFFFF; /* pure white */
+    --color-ring: #FF6B35; /* warm orange */
+    
+    /* State Colors */
+    --color-destructive: #DC3545; /* standard red */
+    --color-destructive-foreground: #FFFFFF; /* white */
+    --color-error: #DC3545; /* standard red */
+    --color-error-foreground: #FFFFFF; /* white */
+    --color-success: #28A745; /* confirmation green */
+    --color-success-foreground: #FFFFFF; /* white */
+    --color-warning: #FFC107; /* warning yellow */
+    --color-warning-foreground: #1A1A1A; /* near-black */
+  }
+}
+
+@layer base {
+  * {
+    @apply border-border;
+  }
+  
+  body {
+    @apply bg-background text-foreground;
+    font-feature-settings: "rlig" 1, "calt" 1;
+  }
+  
+  /* Custom scrollbar for webkit browsers */
+  ::-webkit-scrollbar {
+    width: 6px;
+    height: 6px;
+  }
+  
+  ::-webkit-scrollbar-track {
+    @apply bg-muted;
+  }
+  
+  ::-webkit-scrollbar-thumb {
+    @apply bg-border rounded-full;
+  }
+  
+  ::-webkit-scrollbar-thumb:hover {
+    @apply bg-muted-foreground;
+  }
+}
+
+@layer components {
+  /* Chat bubble animations */
+  .chat-bubble-enter {
+    animation: chatBubbleEnter 200ms ease-out;
+  }
+  
+  @keyframes chatBubbleEnter {
+    from {
+      opacity: 0;
+      transform: translateY(10px) scale(0.95);
+    }
+    to {
+      opacity: 1;
+      transform: translateY(0) scale(1);
+    }
+  }
+  
+  /* Floating action button animations */
+  .fab-scale {
+    transition: transform 200ms ease-out;
+  }
+  
+  .fab-scale:hover {
+    transform: scale(1.05);
+  }
+  
+  .fab-scale:active {
+    transform: scale(0.95);
+  }
+  
+  /* Card hover effects */
+  .card-hover {
+    transition: all 200ms ease-out;
+  }
+  
+  .card-hover:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 8px 25px -8px rgba(0, 0, 0, 0.2);
+  }
+  
+  /* Shimmer loading effect */
+  .shimmer {
+    background: linear-gradient(90deg, 
+      var(--color-muted) 25%, 
+      var(--color-background) 50%, 
+      var(--color-muted) 75%
+    );
+    background-size: 200% 100%;
+    animation: shimmer 1.5s infinite;
+  }
+  
+  @keyframes shimmer {
+    0% {
+      background-position: -200% 0;
+    }
+    100% {
+      background-position: 200% 0;
+    }
+  }
+  
+  /* Bottom sheet animation */
+  .bottom-sheet-enter {
+    animation: bottomSheetEnter 300ms cubic-bezier(0.4, 0, 0.2, 1);
+  }
+  
+  @keyframes bottomSheetEnter {
+    from {
+      transform: translateY(100%);
+    }
+    to {
+      transform: translateY(0);
+    }
+  }
+  
+  /* Gradient background for floating chat button */
+  .chat-gradient {
+    background: linear-gradient(135deg, var(--color-primary) 0%, #FF8A65 100%);
+  }
+}
+
+@layer utilities {
+  /* Text utilities for Inter font */
+  .text-heading {
+    font-family: 'Inter', system-ui, -apple-system, sans-serif;
+    font-weight: 600;
+    line-height: 1.2;
+  }
+  
+  .text-body {
+    font-family: 'Inter', system-ui, -apple-system, sans-serif;
+    font-weight: 400;
+    line-height: 1.5;
+  }
+  
+  .text-caption {
+    font-family: 'Inter', system-ui, -apple-system, sans-serif;
+    font-weight: 400;
+    font-size: 0.875rem;
+    line-height: 1.4;
+  }
+  
+  .text-data {
+    font-family: 'JetBrains Mono', 'Courier New', monospace;
+    font-weight: 400;
+    line-height: 1.4;
+  }
+  
+  /* Shadow utilities */
+  .shadow-card {
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+  }
+  
+  .shadow-floating {
+    box-shadow: 0 4px 16px rgba(0, 0, 0, 0.15);
+  }
+  
+  .shadow-elevated {
+    box-shadow: 0 8px 24px rgba(0, 0, 0, 0.2);
+  }
+  
+  /* Mobile-first responsive utilities */
+  .thumb-zone {
+    padding-bottom: calc(env(safe-area-inset-bottom) + 1rem);
+  }
+  
+  .safe-top {
+    padding-top: env(safe-area-inset-top);
+  }
+  
+  .safe-bottom {
+    padding-bottom: env(safe-area-inset-bottom);
+  }
+}
